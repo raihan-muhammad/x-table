@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { useState, useEffect } from "react";
 import parse from "html-react-parser";
+import styles from "../styles/Home.module.css";
+import { useState, useEffect } from "react";
+
 export default function Home() {
-  const [data, setData] = useState([]);
-  const [result, setResult] = useState();
-  const [input, setInput] = useState(0);
+  const [data, setData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+  const [result, setResult] = useState("");
+  const [input, setInput] = useState("");
 
   const makeTable = (data) => {
     let result = ``;
@@ -27,16 +29,19 @@ export default function Home() {
     return result;
   };
 
-  const makeInput = () => {
-    console.log(input);
+  const makeInput = (e) => {
+    e.preventDefault();
+    setInput("");
+    setData([]);
+    if (input > 50) return alert("The number cannot be more then 50!");
+
     for (let i = 0; i < input; i++) {
-      setData((prev) => [...prev, i + 1]);
+      setData((prevState) => [...prevState, i + 1]);
     }
   };
 
   useEffect(() => {
     setResult(makeTable(data));
-    console.log(data);
     // eslint-disable-next-line
   }, [data]);
   return (
@@ -48,13 +53,21 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <input
-          type="number"
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="masukan angka"
-        />
-        <button onClick={makeInput}>Set</button>
-        <table border="1">{parse(`${result}`)}</table>
+        <form onSubmit={makeInput}>
+          <input
+            type="number"
+            onChange={(e) => setInput(e.target.value)}
+            value={input}
+            placeholder="masukan angka"
+          />
+          <br />
+          <button onClick={makeInput}>Show Table</button>
+        </form>
+        <br />
+
+        <table border="1">
+          <tbody>{parse(`${result}`)}</tbody>
+        </table>
       </main>
 
       <footer className={styles.footer}>
