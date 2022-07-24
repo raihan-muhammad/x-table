@@ -17,7 +17,7 @@ build job:
 test job:
   stage: test
   script:
-    - yarn test
+    - yarn test:prod
 
 deploy job:
   stage: deploy
