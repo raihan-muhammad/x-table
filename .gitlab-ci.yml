@@ -1,0 +1,15 @@
+stages:
+  - build
+  - test
+  - deploy
+
+cache:
+  key: $CI_COMMIT_REF_NAME
+  paths:
+    - node_modules/
+
+build job:
+  stage: build
+  script:
+    - yarn
+    - yarn build
