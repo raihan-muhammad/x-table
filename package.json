@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "test": "jest --watchAll",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "eslint": "8.20.0",
-    "eslint-config-next": "12.2.3"
+    "eslint-config-next": "12.2.3",
+    "jest": "^28.1.3"
   }
 }
