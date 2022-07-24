@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "test:dev": "jest --watchAll",
-    "test:prod": "jest --watchAll",
+    "test:prod": "jest",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
