@@ -2,7 +2,7 @@ stages:
   - build
   - test
   - deploy
-
+image: node:lts
 cache:
   key: $CI_COMMIT_REF_NAME
   paths:
@@ -13,3 +13,20 @@ build job:
   script:
     - yarn
     - yarn build
+
+test job:
+  stage: test
+  script:
+    - yarn test
+
+deploy job:
+  stage: deploy
+  only:
+    - main
+  environment:
+    name: production
+    url: https://x-table-raihan-js.vercel.app/
+  script:
+    - yarn global add vercel
+    - DEPLOYMENT_URL=$(VERCEL_ORG_ID=$VERCEL_ORG_ID VERCEL_PROJECT_ID=$VERCEL_PROJECT_ID vercel --confirm -t $VERCEL_TOKEN --prod)
+
